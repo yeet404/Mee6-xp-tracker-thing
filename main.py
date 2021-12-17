@@ -168,7 +168,7 @@ async def xp_thing():
         await channel.send(embed=embed)
       else:
         embed=discord.Embed(title='Hourly XP', description="No one gained xp in the last hour \n", color=discord.Colour.red())
-      await channel.send(embed=embed)
+        await channel.send(embed=embed)
     if equalsDaily:
       if dailyMessage!='':
         embed=discord.Embed(title='Daily XP', description=dailyMessage, color=discord.Colour.green())
