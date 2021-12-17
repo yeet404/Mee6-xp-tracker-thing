@@ -79,7 +79,7 @@ async def xp_thing():
     elif current_minute=="00":
       #waiting until 12 AM est to start bot
       if firstBotRun:
-        if current_hour=="07":
+        if current_hour=="06":
           print('d')
           firstBotRun=False
           pass
