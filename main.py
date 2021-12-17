@@ -70,13 +70,12 @@ async def xp_thing():
     current_time = now.strftime("%H:%M:%S")
     current_minute=now.strftime("%M")
     current_hour=now.strftime("%H")
-    print(current_time)
     if current_minute!="00":
       continue
     elif current_minute=="00":
       #waiting until 12 AM est to start bot
       if firstBotRun:
-        if current_hour=="06":
+        if current_hour=="05":
           firstBotRun=False
           pass
         else:
