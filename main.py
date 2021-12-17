@@ -65,12 +65,13 @@ async def xp_thing():
       pass
     #waiting a minute for each loop
     else:
-      await asyncio.sleep(60)
+      await asyncio.sleep(30)
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     current_minute=now.strftime("%M")
     current_hour=now.strftime("%H")
     if current_minute!="00":
+      run=False
       continue
     elif current_minute=="00":
       #waiting until 12 AM est to start bot
@@ -82,7 +83,8 @@ async def xp_thing():
           continue
       #waiting every hour until running bot
       else:
-        pass
+        if not run:
+          pass
     equalsWeekly=False
     equalsDaily=False
     equalsHourly=False
@@ -191,6 +193,7 @@ async def xp_thing():
       else:
         embed=discord.Embed(title='Days to Catch (Weekly)', description="No one is going to catch up \n", color=discord.Colour.red())
         await channel.send(embed=embed)
+    run=True
 
 
 #looping the script
