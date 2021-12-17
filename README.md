@@ -6,9 +6,9 @@ Bot that tracks mee6 xp gain for people in server
 
 ### Outputs:
 
-Starts at 12 AM EST (Change it by editing line 82 in main.py)
-Every hour/day/week it outputs "(username)'s hourly/daily/weekly xp is (amount of xp)"
-Every day/week it outputs "(username) will pass (username 2) in (days) at the current xp gain rate."
+- Starts at 12 AM EST (Change it by editing line 82 in main.py)
+- Every hour/day/week it outputs "(username)'s hourly/daily/weekly xp is (amount of xp)"
+- Every day/week it outputs "(username) will pass (username 2) in (days) at the current xp gain rate."
 
 ## Setup
 
