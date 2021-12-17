@@ -62,11 +62,9 @@ async def xp_thing():
     #skipping minute wait when first starting
     if firstRun:
       firstRun=False
-      print('a')
       pass
     #waiting a minute for each loop
     else:
-      print('b')
       await asyncio.sleep(60)
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
@@ -74,17 +72,14 @@ async def xp_thing():
     current_hour=now.strftime("%H")
     print(current_time)
     if current_minute!="00":
-      print('c')
       continue
     elif current_minute=="00":
       #waiting until 12 AM est to start bot
       if firstBotRun:
         if current_hour=="06":
-          print('d')
           firstBotRun=False
           pass
         else:
-          print('e')
           continue
       #waiting every hour until running bot
       else:
@@ -167,27 +162,37 @@ async def xp_thing():
     #sending messages
     if equalsHourly:
       if hourlyMessage!='':
-        print(hourlyMessage)
+        embed=discord.Embed(title='Hourly XP', description=hourlyMessage, color=discord.Colour.green())
+        await channel.send(embed=embed)
       else:
-        print("No one gained xp in the last hour \n")
+        embed=discord.Embed(title='Hourly XP', description="No one gained xp in the last hour \n", color=discord.Colour.red())
+      await channel.send(embed=embed)
     if equalsDaily:
       if dailyMessage!='':
-        print(dailyMessage)
+        embed=discord.Embed(title='Daily XP', description=dailyMessage, color=discord.Colour.green())
+        await channel.send(embed=embed)
       else:
-        print("No one gained xp in the last day \n")
+        embed=discord.Embed(title='Daily XP', description="No one gained xp in the last day \n", color=discord.Colour.green())
+        await channel.send(embed=embed)
       if dailyDaysToCatchMessage!='':
-        print(dailyDaysToCatchMessage)
+        embed=discord.Embed(title='Days to Catch (Daily)', description=dailyDaysToCatchMessage, color=discord.Colour.green())
+        await channel.send(embed=embed)
       else:
-        print("No one is going to catch up \n")
+        embed=discord.Embed(title='Days to Catch (Daily)', description="No one is going to catch up \n", color=discord.Colour.red())
+        await channel.send(embed=embed)
     if equalsWeekly:
       if weeklyMessage!='':
-        print(weeklyMessage)
+        embed=discord.Embed(title='Weekly XP', description=weeklyMessage, color=discord.Colour.orange())
+        await channel.send(embed=embed)
       else:
-        print("No one gained xp in the last week \n")
+        embed=discord.Embed(title='Weekly XP', description="No one gained xp in the past week \n", color=discord.Colour.orange())
+        await channel.send(embed=embed)
       if weeklyDaysToCatchMessage!='':
-        print(weeklyDaysToCatchMessage)
+        embed=discord.Embed(title='Days to Catch (Weekly)', description=weeklyDaysToCatchMessage, color=discord.Colour.orange())
+        await channel.send(embed=embed)
       else:
-        print("No one is going to catch up \n")
+        embed=discord.Embed(title='Days to Catch (Weekly)', description="No one is going to catch up \n", color=discord.Colour.red())
+        await channel.send(embed=embed)
 
 
 #looping the script
