@@ -85,6 +85,8 @@ async def xp_thing():
       else:
         if not run:
           pass
+        elif run:
+          continue
     equalsWeekly=False
     equalsDaily=False
     equalsHourly=False
@@ -162,7 +164,7 @@ async def xp_thing():
     #sending messages
     if equalsHourly:
       if hourlyMessage!='':
-        embed=discord.Embed(title='Hourly XP', description=hourlyMessage, color=discord.Colour.green())
+        embed=discord.Embed(title='Hourly XP', description=hourlyMessage, color=discord.Colour.blue())
         await channel.send(embed=embed)
       else:
         embed=discord.Embed(title='Hourly XP', description="No one gained xp in the last hour \n", color=discord.Colour.red())
