@@ -82,7 +82,6 @@ async def xp_thing():
           continue
       #waiting every hour until running bot
       else:
-        print('f')
         pass
     equalsWeekly=False
     equalsDaily=False
