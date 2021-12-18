@@ -145,7 +145,7 @@ async def xp_thing():
           totalXpDifference=people[p1].totalxp-people[p2].totalxp
           dailyXpDifference=people[p2].dailyxp-people[p1].dailyxp
           daysToCatch=totalXpDifference//dailyXpDifference
-          dailyDaysToCatchMessage+=(f"{people[p1].name} will pass {people[p1].name} in {daysToCatch} days at the current xp gain rate. \n")
+          dailyDaysToCatchMessage+=(f"{people[p2].name} will pass {people[p1].name} in {daysToCatch} days at the current xp gain rate. \n")
     if equalsWeekly:
       peopleWeekly=sorted(people, key = lambda name: people[name].weeklyxp, reverse=True)
       for thing in peopleWeekly:
@@ -161,7 +161,7 @@ async def xp_thing():
           totalXpDifference=people[p1].totalxp-people[p2].totalxp
           weeklyXpDifference=people[p2].weeklyxp-people[p1].weeklyxp
           daysToCatch=totalXpDifference//weeklyXpDifference
-          weeklyDaysToCatchMessage+=(f"{people[p1].name} will pass {people[p1].name} in {daysToCatch} days at the current xp gain rate. \n")
+          weeklyDaysToCatchMessage+=(f"{people[p2].name} will pass {people[p1].name} in {daysToCatch} days at the current xp gain rate. \n")
     #sending messages
     if equalsHourly:
       if hourlyMessage!='':
