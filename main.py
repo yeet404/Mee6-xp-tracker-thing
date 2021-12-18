@@ -83,6 +83,7 @@ async def xp_thing():
           continue
       #waiting every hour until running bot
       else:
+        #don't want to run twice (sleep is less than a minute)
         if not run:
           pass
         elif run:
@@ -121,14 +122,14 @@ async def xp_thing():
         equalsWeekly=True
         people[personId].clear()
     #checking if hourly
-    if equalsHourly==True:
+    if equalsHourly:
       #sending messages
       peopleHourly=sorted(people, key = lambda name: people[name].hourlyxp, reverse=True)
       for thing in peopleHourly:
         if people[thing].hourlyxp!=0:
           hourlyMessage+=f"{people[thing].name}'s hourly xp is {people[thing].hourlyxp}. \n"
     #checking if daily
-    if equalsDaily==True:
+    if equalsDaily:
       #sending messages
       peopleDaily=sorted(people, key = lambda name: people[name].dailyxp, reverse=True)
       for thing in peopleDaily:
@@ -145,7 +146,7 @@ async def xp_thing():
           dailyXpDifference=people[p2].dailyxp-people[p1].dailyxp
           daysToCatch=totalXpDifference//dailyXpDifference
           dailyDaysToCatchMessage+=(f"{people[p1].name} will pass {people[p1].name} in {daysToCatch} days at the current xp gain rate. \n")
-    if equalsWeekly==True:
+    if equalsWeekly:
       peopleWeekly=sorted(people, key = lambda name: people[name].weeklyxp, reverse=True)
       for thing in peopleWeekly:
         if people[thing].weeklyxp!=0:
