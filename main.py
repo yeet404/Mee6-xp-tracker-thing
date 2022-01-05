@@ -13,7 +13,6 @@ mee6API = API(os.environ['API'])
 
 client = commands.Bot(intents=intents, command_prefix = '$')
 
-#setting up class
 class person():
   def __init__(self, name, userid, xplist, hourlyxp, dailyxp, weeklyxp, totalxp):
     self.name=name
@@ -24,15 +23,12 @@ class person():
     self.weeklyxp=weeklyxp
     self.totalxp=totalxp
   
-  #function to calculate hourly xp
   def gethourlyxp(self):
     self.hourlyxp=self.xplist[-1]-self.xplist[-2]
 
-  #function to calculate daily xp
   def getdailyxp(self):
     self.dailyxp=self.xplist[-1]-self.xplist[-24]
 
-  #function to calculate weekly xp
   def getweeklyxp(self):
     self.weeklyxp=self.xplist[-1]-self.xplist[0]
 
@@ -47,12 +43,12 @@ people={}
 async def on_ready():
   print('Logged in as {0.user}'.format(client))
 
-#main part
 async def xp_thing():
   global people
   await client.wait_until_ready()
   #getting channel to send messages in
   channel=client.get_channel(id=os.environ['CHANNELID'])
+  #setting up dictionary
   leaderboard_page = await mee6API.levels.get_leaderboard_page(0)
   for x in range(len(leaderboard_page['players'])):
     people[leaderboard_page['players'][x]['id']]=person(leaderboard_page['players'][x]['username'], leaderboard_page['players'][x]['id'], [], 1, 1, 1, leaderboard_page['players'][x]['xp'])
@@ -70,6 +66,7 @@ async def xp_thing():
     current_time = now.strftime("%H:%M:%S")
     current_minute=now.strftime("%M")
     current_hour=now.strftime("%H")
+    print(current_hour)
     if current_minute!="00":
       run=False
       continue
@@ -121,14 +118,12 @@ async def xp_thing():
         people[personId].getweeklyxp()
         equalsWeekly=True
         people[personId].clear()
-    #checking if hourly
     if equalsHourly:
       #sending messages
       peopleHourly=sorted(people, key = lambda name: people[name].hourlyxp, reverse=True)
       for thing in peopleHourly:
         if people[thing].hourlyxp!=0:
           hourlyMessage+=f"{people[thing].name}'s hourly xp is {people[thing].hourlyxp}. \n"
-    #checking if daily
     if equalsDaily:
       #sending messages
       peopleDaily=sorted(people, key = lambda name: people[name].dailyxp, reverse=True)
@@ -164,33 +159,33 @@ async def xp_thing():
           weeklyDaysToCatchMessage+=(f"{people[p2].name} will pass {people[p1].name} in {daysToCatch} days at the current xp gain rate. \n")
     #sending messages
     if equalsHourly:
-      if hourlyMessage!='':
+      if not hourlyMessage:
         embed=discord.Embed(title='Hourly XP', description=hourlyMessage, color=discord.Colour.blue())
         await channel.send(embed=embed)
       else:
         embed=discord.Embed(title='Hourly XP', description="No one gained xp in the last hour \n", color=discord.Colour.red())
         await channel.send(embed=embed)
     if equalsDaily:
-      if dailyMessage!='':
+      if not dailyMessage:
         embed=discord.Embed(title='Daily XP', description=dailyMessage, color=discord.Colour.green())
         await channel.send(embed=embed)
       else:
         embed=discord.Embed(title='Daily XP', description="No one gained xp in the last day \n", color=discord.Colour.green())
         await channel.send(embed=embed)
-      if dailyDaysToCatchMessage!='':
+      if not dailyDaysToCatchMessage:
         embed=discord.Embed(title='Days to Catch (Daily)', description=dailyDaysToCatchMessage, color=discord.Colour.green())
         await channel.send(embed=embed)
       else:
         embed=discord.Embed(title='Days to Catch (Daily)', description="No one is going to catch up \n", color=discord.Colour.red())
         await channel.send(embed=embed)
     if equalsWeekly:
-      if weeklyMessage!='':
+      if not weeklyMessage:
         embed=discord.Embed(title='Weekly XP', description=weeklyMessage, color=discord.Colour.orange())
         await channel.send(embed=embed)
       else:
         embed=discord.Embed(title='Weekly XP', description="No one gained xp in the past week \n", color=discord.Colour.orange())
         await channel.send(embed=embed)
-      if weeklyDaysToCatchMessage!='':
+      if not weeklyDaysToCatchMessage:
         embed=discord.Embed(title='Days to Catch (Weekly)', description=weeklyDaysToCatchMessage, color=discord.Colour.orange())
         await channel.send(embed=embed)
       else:
@@ -199,7 +194,5 @@ async def xp_thing():
     run=True
 
 
-#looping the script
 client.loop.create_task(xp_thing())
-#running
 client.run(os.environ['TOKEN'])

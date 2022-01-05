@@ -7,7 +7,7 @@
 
 ### Outputs:
 
-- Starts at 12 AM EST (Change it by editing line 79 in main.py)
+- Starts at 12 AM EST (Change it by editing line that contains `if current_hour==` in main.py)
 - Every hour/day/week it outputs "(username)'s hourly/daily/weekly xp is (amount of xp)"
 - Every day/week it outputs "(username) will pass (username 2) in (days) at the current xp gain rate."
 
