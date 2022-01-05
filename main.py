@@ -159,33 +159,33 @@ async def xp_thing():
           weeklyDaysToCatchMessage+=(f"{people[p2].name} will pass {people[p1].name} in {daysToCatch} days at the current xp gain rate. \n")
     #sending messages
     if equalsHourly:
-      if not hourlyMessage:
+      if hourlyMessage:
         embed=discord.Embed(title='Hourly XP', description=hourlyMessage, color=discord.Colour.blue())
         await channel.send(embed=embed)
       else:
         embed=discord.Embed(title='Hourly XP', description="No one gained xp in the last hour \n", color=discord.Colour.red())
         await channel.send(embed=embed)
     if equalsDaily:
-      if not dailyMessage:
+      if dailyMessage:
         embed=discord.Embed(title='Daily XP', description=dailyMessage, color=discord.Colour.green())
         await channel.send(embed=embed)
       else:
         embed=discord.Embed(title='Daily XP', description="No one gained xp in the last day \n", color=discord.Colour.green())
         await channel.send(embed=embed)
-      if not dailyDaysToCatchMessage:
+      if dailyDaysToCatchMessage:
         embed=discord.Embed(title='Days to Catch (Daily)', description=dailyDaysToCatchMessage, color=discord.Colour.green())
         await channel.send(embed=embed)
       else:
         embed=discord.Embed(title='Days to Catch (Daily)', description="No one is going to catch up \n", color=discord.Colour.red())
         await channel.send(embed=embed)
     if equalsWeekly:
-      if not weeklyMessage:
+      if weeklyMessage:
         embed=discord.Embed(title='Weekly XP', description=weeklyMessage, color=discord.Colour.orange())
         await channel.send(embed=embed)
       else:
         embed=discord.Embed(title='Weekly XP', description="No one gained xp in the past week \n", color=discord.Colour.orange())
         await channel.send(embed=embed)
-      if not weeklyDaysToCatchMessage:
+      if weeklyDaysToCatchMessage:
         embed=discord.Embed(title='Days to Catch (Weekly)', description=weeklyDaysToCatchMessage, color=discord.Colour.orange())
         await channel.send(embed=embed)
       else:
