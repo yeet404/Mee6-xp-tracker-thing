@@ -13,14 +13,14 @@ mee6API = API(os.environ['API'])
 
 client = commands.Bot(intents=intents, command_prefix = '$')
 
-class person():
-  def __init__(self, name, userid, xplist, hourlyxp, dailyxp, weeklyxp, totalxp):
+class Person():
+  def __init__(self, name, userid, totalxp):
     self.name=name
     self.userid=userid
-    self.xplist=list(xplist)
-    self.hourlyxp=hourlyxp
-    self.dailyxp=dailyxp
-    self.weeklyxp=weeklyxp
+    self.xplist=[[]]
+    self.hourlyxp = 1
+    self.dailyxp = 1
+    self.weeklyxp = 1
     self.totalxp=totalxp
   
   def gethourlyxp(self):
@@ -51,7 +51,8 @@ async def xp_thing():
   #setting up dictionary
   leaderboard_page = await mee6API.levels.get_leaderboard_page(0)
   for x in range(len(leaderboard_page['players'])):
-    people[leaderboard_page['players'][x]['id']]=person(leaderboard_page['players'][x]['username'], leaderboard_page['players'][x]['id'], [], 1, 1, 1, leaderboard_page['players'][x]['xp'])
+    player = leaderboard_page['players'][x]
+    people[player['id']]=Person(player['username'], player['id'], player['xp'])
     firstRun=True
     firstBotRun=True
   while not client.is_closed():
